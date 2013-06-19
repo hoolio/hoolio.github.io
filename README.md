@@ -2,6 +2,7 @@ Scribble
 ========
 
 A jekyll theme. [Want a demo? click and read instruction. :point_left:](http://scribble.muan.co/2013/05/06/scribble-the-jekyll-theme/)
+<br />(I am currently working on a collection of themes, here's [a preview for one of them](http://themes.muan.co/personal/2013/05/19/sore-throat/). You know how to [stay](https://twitter.com/muanchiou) [posted](https://github.com/muan). :flushed: )
 
 ![screenshot](http://scribble.muan.co/images/screenshot.png)
 
@@ -45,7 +46,7 @@ When writing a post, there are 3 options you can add to the header.
   An option for showing tweet and like button under a post.
 
 3. **date**: 2013-05-06 18:07:17<br />
-  Date is not a required header since Jekyll reads the file name for date, this was added in only for the **signoff time**. (as shown at the end of this post) If you don't want the signoff time, go into `/includes/signoff.html` and remove the `<span>`.
+  Date is not a required header since Jekyll reads the file name for date, this was added in only for the **signoff time**. (as shown at the end of this post) If you don't want the signoff time, go into `/includes/signoff.html` remove the `<span>`, and remove `{% include signoff.html %}` from `/layouts/post.html`.
 
 ---
 
