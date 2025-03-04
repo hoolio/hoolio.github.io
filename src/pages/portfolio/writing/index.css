@@ -1,0 +1,36 @@
+.book {
+  position: relative;
+  width: 200px;
+  height: 300px;
+  perspective: 1000px;
+  will-change: transform opacity;
+  border: 12px solid rgb(80, 80, 80);
+  background-color: rgb(80, 80, 80);
+  border-radius: 5px;
+  box-shadow: 2px 2px 0 rgb(80, 80, 80), 4px 4px 0 rgb(80, 80, 80),
+    6px 6px 0 rgb(80, 80, 80), 8px 8px 0 rgb(80, 80, 80),
+    15px 15px 20px rgba(0, 0, 0, 0.5);
+}
+
+.page {
+  border-radius: 5px;
+  transform-origin: left;
+  transition: transform 0.8s ease-in-out;
+  /* box-shadow: inset 2px 2px 15px rgb(80, 80, 80); */
+}
+
+.flipped {
+  transform: rotateY(-180deg);
+  z-index: 2;
+}
+
+.page-content {
+  height: 100%;
+  overflow: scroll;
+  opacity: 1;
+  transition: opacity 0.8s linear;
+}
+
+.flipped .page-content {
+  opacity: 0;
+}
