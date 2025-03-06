@@ -7,21 +7,16 @@ import { CircularProgress } from "@mui/material";
 
 const forestPan = "/forest-pan.mp4";
 const spaceTimelapse = "/space-timelapse.mp4";
-const preloadVideos = async (sources: string[]) => {
-  return Promise.all(
-    sources.map(
-      (src) =>
-        new Promise((resolve, reject) => {
-          const video = document.createElement("video");
-          video.src = src;
-          video.preload = "auto";
-
-          video.oncanplaythrough = () => resolve(true);
-          video.onerror = reject;
+const prefetchVideos = async (sources: string[]) =>
+  Promise.all(
+    sources.map((src) =>
+      fetch(src)
+        .then((res) => {
+          if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
         })
+        .catch((err) => console.error("Video prefetch failed:", err))
     )
   );
-};
 
 const App = () => {
   const { pathname } = useLocation();
@@ -42,7 +37,7 @@ const App = () => {
   // Don't display the page until videos are fully loaded
   const [videosLoaded, setVideosLoaded] = useState(false);
   useEffect(() => {
-    preloadVideos([forestPan, spaceTimelapse])
+    prefetchVideos([forestPan, spaceTimelapse])
       .then(() => setVideosLoaded(true))
       .catch((err) => console.error("Error preloading videos:", err));
   }, []);
