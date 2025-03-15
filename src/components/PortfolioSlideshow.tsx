@@ -4,6 +4,7 @@ import { projects, ProjectTitles } from "../const/projects";
 import { EffectCreative } from "swiper/modules";
 import { Card, CardContent, CardHeader, CardMedia } from "@mui/material";
 import { useEffect, useState } from "react";
+import AdsClickIcon from "@mui/icons-material/AdsClick";
 
 interface PortfolioSlideshowProps {
   onCardClick: (title: ProjectTitles) => void;
@@ -67,7 +68,7 @@ const PortfolioSlideshow = (props: PortfolioSlideshowProps) => {
         loop
       >
         {projects.map((project, index) => (
-          <SwiperSlide key={index}>
+          <SwiperSlide key={index} className="relative">
             <Card
               onClick={() => props.onCardClick(project.title)}
               sx={{ height: "50vh", background: "none" }}
@@ -87,6 +88,9 @@ const PortfolioSlideshow = (props: PortfolioSlideshowProps) => {
                 <p className="text-xs">{project.content}</p>
               </CardContent>
             </Card>
+            <div className="absolute right-2 top-4 animate-pulse">
+              <AdsClickIcon sx={{ fontSize: "2rem" }} />
+            </div>
           </SwiperSlide>
         ))}
       </Swiper>

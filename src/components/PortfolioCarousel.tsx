@@ -1,5 +1,6 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Navigation, Pagination } from "swiper/modules";
+import AdsClickIcon from "@mui/icons-material/AdsClick";
 import { projects, ProjectTitles } from "../const/projects";
 import { Card, CardContent, CardHeader, CardMedia } from "@mui/material";
 import { useState } from "react";
@@ -41,7 +42,7 @@ const PortfolioCarousel = (props: PortfolioCarouselProps) => {
         effect={"coverflow"}
         modules={[Navigation, Pagination, EffectCoverflow]}
         spaceBetween={0}
-        slidesPerView={2}
+        slidesPerView={1.9}
         centeredSlides={true}
         coverflowEffect={{
           rotate: 20,
@@ -94,12 +95,15 @@ const PortfolioCarousel = (props: PortfolioCarouselProps) => {
             <SwiperSlide key={index}>
               {index === activeIndex ? (
                 <motion.div
-                  className="cursor-pointer"
+                  className="cursor-pointer relative"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => props.onCardClick(project.title)}
                 >
                   {cardBody}
+                  <div className="absolute right-2 top-4 animate-pulse">
+                    <AdsClickIcon sx={{ fontSize: "3rem" }} />
+                  </div>
                 </motion.div>
               ) : (
                 cardBody
