@@ -71,7 +71,7 @@ const PortfolioSlideshow = (props: PortfolioSlideshowProps) => {
           <SwiperSlide key={index} className="relative">
             <Card
               onClick={() => props.onCardClick(project.title)}
-              sx={{ height: "50vh", background: "none" }}
+              sx={{ minHeight: "50vh", background: "none" }}
               className="flex flex-col"
             >
               <CardHeader
