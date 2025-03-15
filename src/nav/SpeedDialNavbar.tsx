@@ -6,9 +6,9 @@ import CreateIcon from "@mui/icons-material/Create";
 import DirectionsRunIcon from "@mui/icons-material/DirectionsRun";
 import EngineeringIcon from "@mui/icons-material/Engineering";
 import MusicNoteIcon from "@mui/icons-material/MusicNote";
-import { HashLink } from "react-router-hash-link";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { MOBILE_WIDTH } from "../const";
 
 const SpeedDialNavbar = () => {
   const location = useLocation();
@@ -29,6 +29,23 @@ const SpeedDialNavbar = () => {
     return () => clearTimeout(timer);
   }, [location]);
 
+  // If the URL has a hash, scroll to that element
+  useEffect(() => {
+    if (location.hash) {
+      // Take out the '#' at the beginning of the hash
+      let el = document.getElementById(location.hash.substring(1));
+      if (el) {
+        // Wait 100ms to give the components time to finish rendering
+        setTimeout(() => {
+          el.scrollIntoView({ behavior: "smooth" });
+        }, 100);
+      }
+    } else {
+      // Scroll to the top if there's no hash
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [location.hash]);
+
   const fabProps = {
     sx: {
       bgcolor: "transparent",
@@ -40,8 +57,6 @@ const SpeedDialNavbar = () => {
     },
   };
 
-  // navigate() doesn't work with anchor links (#), so we use HashLink
-  // instead.
   const navItems = [
     {
       label: "Home",
@@ -50,45 +65,30 @@ const SpeedDialNavbar = () => {
     },
     {
       label: "Portfolio",
-      icon: (
-        <HashLink smooth to="/portfolio#">
-          <CollectionsIcon />
-        </HashLink>
-      ),
+      icon: <CollectionsIcon />,
+      onClick: () => navigate("/portfolio"),
     },
   ];
   const subItems = [
     {
       label: "Running",
-      icon: (
-        <HashLink smooth to="/portfolio#running">
-          <DirectionsRunIcon />
-        </HashLink>
-      ),
+      icon: <DirectionsRunIcon />,
+      onClick: () => navigate("/portfolio#running"),
     },
     {
       label: "Engineering",
-      icon: (
-        <HashLink smooth to="/portfolio#engineering">
-          <EngineeringIcon />
-        </HashLink>
-      ),
+      icon: <EngineeringIcon />,
+      onClick: () => navigate("/portfolio#engineering"),
     },
     {
       label: "Music",
-      icon: (
-        <HashLink smooth to="/portfolio#music">
-          <MusicNoteIcon />
-        </HashLink>
-      ),
+      icon: <MusicNoteIcon />,
+      onClick: () => navigate("/portfolio#music"),
     },
     {
       label: "Writing",
-      icon: (
-        <HashLink smooth to="/portfolio#writing">
-          <CreateIcon />
-        </HashLink>
-      ),
+      icon: <CreateIcon />,
+      onClick: () => navigate("/portfolio#writing"),
     },
   ];
 
@@ -117,7 +117,7 @@ const SpeedDialNavbar = () => {
     ></SpeedDialAction>
   );
 
-  const onPortfolioPage = location.pathname.includes("portfolio");
+  const isMobileWidth = window.innerWidth <= MOBILE_WIDTH;
 
   return (
     <SpeedDial
@@ -126,8 +126,8 @@ const SpeedDialNavbar = () => {
       onOpen={handleOpen}
       sx={{
         position: "fixed",
-        top: "2rem",
-        right: "2rem",
+        top: isMobileWidth ? "0.5rem" : "2rem",
+        right: isMobileWidth ? "0.5rem" : "2rem",
       }}
       FabProps={fabProps}
       icon={<MenuIcon />}
@@ -135,19 +135,18 @@ const SpeedDialNavbar = () => {
       onClick={() => (open ? handleClose() : handleOpen())}
     >
       {navItems.map((item) => speedDialAction(item))}
-      {onPortfolioPage && (
-        <Fade in={open}>
-          <Divider
-            sx={{
-              borderColor: "white",
-              marginTop: "0.5rem",
-              marginBottom: "0.5rem",
-            }}
-          />
-        </Fade>
-      )}
 
-      {onPortfolioPage && subItems.map((item) => speedDialAction(item))}
+      <Fade in={open}>
+        <Divider
+          sx={{
+            borderColor: "white",
+            marginTop: "0.5rem",
+            marginBottom: "0.5rem",
+          }}
+        />
+      </Fade>
+
+      {subItems.map((item) => speedDialAction(item))}
     </SpeedDial>
   );
 };
