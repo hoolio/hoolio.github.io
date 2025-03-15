@@ -174,7 +174,7 @@ const Running = () => {
               homeschool, YiOu Wang. On top of being a great teacher and leader,
               YiOu is one of the greatest long-distance trail runners in the
               world. She's sponsored and participates in races all over the
-              globe. She got me and my sisters into trail running, and it's been
+              globe. She got my sisters and I into trail running, and it's been
               terrific. I've competed in the world-famous Dipsea Race many years
               in a row, which starts in Mill Valley and runs up and over the Mt.
               Tam mountains and onto Stinson Beach. I like surfing there, too!

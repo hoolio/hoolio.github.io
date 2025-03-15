@@ -1,8 +1,6 @@
 import { useRef } from "react";
 import Running from "./running/Running";
 import Engineering from "./engineering/Engineering";
-import { Helmet } from "react-helmet";
-// import Lego from "./lego/Lego";
 import Music from "./music/Music";
 import Writing from "./writing/Writing";
 import scrollIntoView from "scroll-into-view";
@@ -36,28 +34,6 @@ const PortfolioPage = () => {
 
   return (
     <>
-      <Helmet>
-        <link rel="preload" href="/running/MtTamTrailRun.jpg" as="image" />
-        <link rel="preload" href="/running/Track.jpg" as="image" />
-        <link rel="preload" href="/running/TrailRun.jpg" as="image" />
-        <link
-          rel="preload"
-          href="/engineering/BalsaEarthquakeTower.jpg"
-          as="image"
-        />
-        <link rel="preload" href="/engineering/BalsaBridge.jpg" as="image" />
-        <link
-          rel="preload"
-          href="/engineering/MixopterasModel.jpg"
-          as="image"
-        />
-        <link
-          rel="preload"
-          href="/engineering/MixopterasModel2.jpg"
-          as="image"
-        />
-      </Helmet>
-
       <div id="portfolioPage" className="flex flex-col">
         {isMobileWidth ? (
           <PortfolioSlideshow onCardClick={onCardClick} />
@@ -66,19 +42,19 @@ const PortfolioPage = () => {
         )}
 
         <div className="w-screen flex flex-col">
-          <div ref={projectRefs[ProjectTitles.RUNNING]}>
+          <div id="running" ref={projectRefs[ProjectTitles.RUNNING]}>
             <Running />
           </div>
-          <div ref={projectRefs[ProjectTitles.ENGINEERING]}>
+          <div id="engineering" ref={projectRefs[ProjectTitles.ENGINEERING]}>
             <Engineering />
           </div>
           {/* <div ref={projectRefs[ProjectTitles.LEGO]}>
           <Lego />
         </div> */}
-          <div ref={projectRefs[ProjectTitles.MUSIC]}>
+          <div id="music" ref={projectRefs[ProjectTitles.MUSIC]}>
             <Music />
           </div>
-          <div ref={projectRefs[ProjectTitles.WRITING]}>
+          <div id="writing" ref={projectRefs[ProjectTitles.WRITING]}>
             <Writing />
           </div>
         </div>
